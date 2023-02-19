@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=0.1
+Name=Tetrahexyl
+Comment=Simple Tetris clone
+GenericName=Tetris-like game
+Exec=tetrahexyl
+Icon=tetrahexyl
+Terminal=false
+Type=Application
+Categories=Game;
+StartupNotify=false

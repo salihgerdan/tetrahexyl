@@ -7,5 +7,6 @@ Tetris clone using the SFML library in C++.
 
 ## Building
 Install the sfml development libraries, and run `make`. Only tested on Linux.
+Alternatively, use the PKGBUILD file on Arch Linux.
 
 ![screenshot](screenshot.png)
