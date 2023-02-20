@@ -152,6 +152,7 @@ class Tetrimino {
             pos[1] = old_pos[1];
             if (dir == 'p') {
                 // initial placement failed, it's over
+		// TODO: this is part of the game logic, decouple it
                 game_over = true;
             } else if (dir == 'd') {
                 // downward movement failed, landed
@@ -250,7 +251,6 @@ void draw_screen(sf::RenderWindow &app, gui::GUIElements &gui_elements, Tetrimin
 }
 
 // Controls
-
 void handle_event(sf::Event event, Tetrimino* curtet, Tetrimino* nexttet) {
     // Close window: exit
     if (event.type == sf::Event::Closed) {
