@@ -1,6 +1,4 @@
 #pragma once
-#include <array>
-//using std::array;
 namespace shapes {
 const char Ishape[4][4][4] = {{{'s', 'c', 's', 's'},
                                {'s', 'c', 's', 's'},
