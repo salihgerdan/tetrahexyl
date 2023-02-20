@@ -86,13 +86,7 @@ void checks_after_landing() {
 }
 
 // Tetrimino
-struct TetriminoImpossibleMove : public std::exception
-{
-	const char * what () const throw ()
-    {
-    	return "Movement is not possible, reverted.";
-    }
-};
+struct TetriminoImpossibleMove : public std::exception {};
 
 class Tetrimino {
   public:
@@ -152,7 +146,7 @@ class Tetrimino {
             pos[1] = old_pos[1];
             if (dir == 'p') {
                 // initial placement failed, it's over
-		// TODO: this is part of the game logic, decouple it
+            	// TODO: this is part of the game logic, decouple it
                 game_over = true;
             } else if (dir == 'd') {
                 // downward movement failed, landed
@@ -251,13 +245,14 @@ void draw_screen(sf::RenderWindow &app, gui::GUIElements &gui_elements, Tetrimin
 }
 
 // Controls
-void handle_event(sf::Event event, Tetrimino* curtet, Tetrimino* nexttet) {
+
+void handle_event(sf::Event event, Tetrimino*& curtet, Tetrimino*& nexttet) {
     // Close window: exit
     if (event.type == sf::Event::Closed) {
         app->close();
     }
     if (event.type == sf::Event::KeyPressed) {
-        if (paused == false) {
+        if (!paused) {
             switch (event.key.code) {
             case sf::Keyboard::Left:
                 curtet->move('l');
@@ -280,7 +275,7 @@ void handle_event(sf::Event event, Tetrimino* curtet, Tetrimino* nexttet) {
             default:
                 break;
             }
-        } else if (paused == true && event.key.code == sf::Keyboard::P) {
+        } else if (paused && event.key.code == sf::Keyboard::P) {
             paused = false;
         }
         if (game_over && event.key.code == sf::Keyboard::Return) {
@@ -293,10 +288,12 @@ void handle_event(sf::Event event, Tetrimino* curtet, Tetrimino* nexttet) {
                     board[row][col] = 's';
                 }
             }
+            // pass pointers by reference to be able to change them here
+            // or do this elsewhere anyhow
             delete curtet;
             curtet = nexttet;
-            curtet->place_on_board();
             nexttet = new Tetrimino();
+            curtet->place_on_board();
         }
     }
 }
@@ -341,8 +338,8 @@ int main() {
             checks_after_landing();
             delete curtet;
             curtet = nexttet;
-            curtet->place_on_board();
             nexttet = new Tetrimino();
+            curtet->place_on_board();
         }
         sf::sleep(sf::milliseconds(1000 / refresh_rate));
     }

@@ -23,6 +23,7 @@ GUIElements::GUIElements(const int rows, const int cols): rows(rows), cols(cols)
     board_hide_rect = init_board_hide_rect();
     paused_text = init_paused_text();
     game_over_text = init_game_over_text();
+    game_over_score_text = init_game_over_score();
     game_over_score_label = init_game_over_score_label();
     game_over_instruction_line1 = init_game_over_instruction_line1();
     game_over_instruction_line2 = init_game_over_instruction_line2();
